@@ -1,4 +1,6 @@
-package com.aneto.todolist.domain;
+package com.aneto.todolist.task.domain;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -11,7 +13,8 @@ import java.util.Date;
 public class Task {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
 
     @NotNull
@@ -23,7 +26,11 @@ public class Task {
     @NotBlank
     private String description;
 
-    @NotBlank
+    /**
+     * TODO put not blank to work
+     */
+    @Enumerated(EnumType.STRING)
+    @Column(name = "task_status")
     private TaskStatus status = TaskStatus.PENDING;
 
     private Date updateTime;
@@ -56,5 +63,9 @@ public class Task {
 
     public void setStatus(TaskStatus status) {
         this.status = status;
+    }
+
+    public String getId() {
+        return id;
     }
 }
