@@ -1,6 +1,8 @@
 package com.aneto.todolist.task.domain;
 
-import org.hibernate.annotations.GenericGenerator;
+
+import com.aneto.todolist.core.domain.DomainEntity;
+import com.aneto.todolist.user.domain.User;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -10,12 +12,8 @@ import java.util.Date;
 
 @Entity
 @Table(name = "db_task")
-public class Task {
+public class Task extends DomainEntity {
 
-    @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
-    private String id;
 
     @NotNull
     private final Date creationTime = new Date();
@@ -25,6 +23,21 @@ public class Task {
 
     @NotBlank
     private String description;
+
+    /**
+     * TODO: Find a way to create userFK in DB
+     */
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
+    /**
+     * @deprecated do not use. Framework usage only;
+     */
+    @Deprecated(forRemoval = false)
+    public Task() {
+
+    }
 
     /**
      * TODO put not blank to work
@@ -65,7 +78,4 @@ public class Task {
         this.status = status;
     }
 
-    public String getId() {
-        return id;
-    }
 }
