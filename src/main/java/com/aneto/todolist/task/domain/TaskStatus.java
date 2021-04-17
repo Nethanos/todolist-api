@@ -1,4 +1,4 @@
-package com.aneto.todolist.domain;
+package com.aneto.todolist.task.domain;
 
 public enum TaskStatus {
 
