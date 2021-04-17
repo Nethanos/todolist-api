@@ -1,6 +1,6 @@
-package com.aneto.todolist.dto;
+package com.aneto.todolist.task.dto;
 
-import com.aneto.todolist.domain.Task;
+import com.aneto.todolist.task.domain.Task;
 
 public class TaskResponse {
 

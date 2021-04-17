@@ -1,29 +1,35 @@
 package com.aneto.todolist.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+@Entity
+@Table(name = "db_task")
 public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
+    @NotNull
     private final Date creationTime = new Date();
 
+    @NotBlank
     private String summary;
 
+    @NotBlank
     private String description;
 
-    private TaskStatus status;
+    @NotBlank
+    private TaskStatus status = TaskStatus.PENDING;
 
     private Date updateTime;
 
 
-    public Task(String summary, String description) {
+    public Task(@Valid String summary, @Valid String description) {
         this.summary = summary;
         this.description = description;
     }
