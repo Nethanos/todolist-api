@@ -65,7 +65,7 @@ public class TaskService {
 
         criteria.where(predicateList.toArray(new Predicate[predicateList.size()]));
 
-        criteria.orderBy(builder.asc(root.get(Task_.status)));
+        criteria.orderBy(builder.desc(root.get(Task_.status)));
         return criteria;
     }
 
