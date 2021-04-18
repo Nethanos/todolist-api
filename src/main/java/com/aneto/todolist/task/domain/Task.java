@@ -27,7 +27,7 @@ public class Task extends DomainEntity {
     /**
      * TODO: Find a way to create userFK in DB
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
@@ -43,7 +43,6 @@ public class Task extends DomainEntity {
      * TODO put not blank to work
      */
     @Enumerated(EnumType.STRING)
-    @Column(name = "task_status")
     private TaskStatus status = TaskStatus.PENDING;
 
     private Date updateTime;
@@ -78,4 +77,19 @@ public class Task extends DomainEntity {
         this.status = status;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
 }
