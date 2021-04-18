@@ -1,7 +1,8 @@
 package com.aneto.todolist.core.security;
 
 import com.aneto.todolist.core.filters.AuthFilter;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.aneto.todolist.core.services.JwtTokenService;
+import com.aneto.todolist.user.service.UserService;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,23 +19,28 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableConfigurationProperties
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-        @Autowired
-        private UserDetailsComponent userDetailsComponent;
+        private final JwtTokenService jwtTokenService;
+        private final UserService userService;
 
-        @Autowired
-        private AuthFilter authFilter;
+        private final UserDetailsComponent userDetailsComponent;
+
+        public WebSecurityConfiguration(JwtTokenService jwtTokenService, UserService userService, UserDetailsComponent userDetailsComponent) {
+                this.jwtTokenService = jwtTokenService;
+                this.userService = userService;
+                this.userDetailsComponent = userDetailsComponent;
+        }
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
 
                 http
                         .authorizeRequests()
-                        .antMatchers("/auth").permitAll()
+                        .antMatchers("/task/**").permitAll()
                         .and()
                         .csrf().disable()
                         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                         .and()
-                        .addFilterBefore(this.authFilter, UsernamePasswordAuthenticationFilter.class);
+                        .addFilterBefore(new AuthFilter(jwtTokenService, userService), UsernamePasswordAuthenticationFilter.class);
         }
 
         @Override
@@ -55,7 +61,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         public void configure(WebSecurity web) throws Exception {
                 web
                         .ignoring()
-                        .antMatchers("/h2-console/**");
+                        .antMatchers("/h2-console/**")
+                        .antMatchers("/auth/**");
         }
 
 
