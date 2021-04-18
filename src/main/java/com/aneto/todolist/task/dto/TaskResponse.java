@@ -1,7 +1,9 @@
 package com.aneto.todolist.task.dto;
 
 import com.aneto.todolist.task.domain.Task;
+import com.aneto.todolist.utils.JsonDefaultConfig;
 
+@JsonDefaultConfig
 public class TaskResponse {
 
     private String summary;
@@ -13,12 +15,4 @@ public class TaskResponse {
             this.description = task.getDescription();
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-
-    public String getSummary() {
-        return summary;
-    }
 }
