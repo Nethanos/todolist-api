@@ -16,4 +16,7 @@ public class Role extends DomainEntity {
     @ManyToMany(mappedBy = "roles")
     private Collection<User> users;
 
+    public String getName() {
+        return name;
+    }
 }
