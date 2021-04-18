@@ -23,7 +23,7 @@ public class AuthController {
         this.authenticationManager = authenticationManager;
         this.jwtTokenService = jwtTokenService;
     }
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<String> login(@RequestBody LoginFormRequest loginFormRequest){
 
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = loginFormRequest.toAuthToken();

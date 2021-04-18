@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -26,9 +27,9 @@ public class TaskController {
     }
 
 
-    @GetMapping("/")
-    public ResponseEntity<List<TaskResponse>> getTasks(){
-        List<Task> taskList = taskService.getTasks("PENDING");
+    @GetMapping
+    public ResponseEntity<List<TaskResponse>> getTasks(@RequestParam(name = "status", required = false) String status){
+        List<Task> taskList = taskService.getTasks(status);
 
         ArrayList<TaskResponse> taskResponseList = new ArrayList<>();
 
@@ -37,7 +38,7 @@ public class TaskController {
         return ResponseEntity.ok(taskResponseList);
     }
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<String> newTask(@RequestBody NewTaskRequest newTaskRequest) {
 
         Task newTask = newTaskRequest.toModel();

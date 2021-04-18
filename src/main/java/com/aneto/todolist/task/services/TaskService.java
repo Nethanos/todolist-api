@@ -14,7 +14,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
@@ -48,12 +47,12 @@ public class TaskService {
         CriteriaQuery<Task> criteria = builder.createQuery( Task.class );
 
         Root<Task> root = criteria.from(Task.class);
-        
+
         ArrayList<Predicate> predicateList = new ArrayList<Predicate>();
 
         predicateList.add(builder.equal(root.get(Task_.user).get(User_.id), userId));
         if(Objects.nonNull(taskStatus)){
-            predicateList.add(builder.equal(root.get(Task_.status), TaskStatus.valueOf(taskStatus)));
+            predicateList.add(builder.equal(root.get(Task_.status), TaskStatus.valueOf(taskStatus.toUpperCase())));
         }
 
         criteria.where(predicateList.toArray(new Predicate[predicateList.size()]));
