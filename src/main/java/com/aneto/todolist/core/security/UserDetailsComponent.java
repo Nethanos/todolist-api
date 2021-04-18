@@ -2,7 +2,6 @@ package com.aneto.todolist.core.security;
 
 import com.aneto.todolist.user.domain.User;
 import com.aneto.todolist.user.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
