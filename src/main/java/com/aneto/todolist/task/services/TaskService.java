@@ -19,6 +19,7 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class TaskService {
@@ -39,6 +40,12 @@ public class TaskService {
 
         return taskList;
 
+    }
+
+    public Task retrieveTask(String taskId){
+        Optional<Task> optionalTask = Optional.of(em.find(Task.class, taskId));
+
+        return optionalTask.orElseThrow(() -> new RuntimeException("Não achei man"));
     }
 
     private CriteriaQuery<Task> getTaskCriteriaQuery(String taskStatus, String userId) {
