@@ -1,13 +1,12 @@
 package com.aneto.todolist.core.filters;
 
+import com.aneto.todolist.core.exceptions.MissingTokenException;
 import com.aneto.todolist.core.security.ApplicationUserDetails;
 import com.aneto.todolist.core.services.JwtTokenService;
 import com.aneto.todolist.user.domain.User;
 import com.aneto.todolist.user.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -16,24 +15,36 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Component
 public class AuthFilter extends OncePerRequestFilter {
 
-    @Autowired
     private JwtTokenService jwtTokenService;
 
-    @Autowired
     private UserService userService;
+
+    public AuthFilter(JwtTokenService jwtTokenService, UserService userService) {
+        this.jwtTokenService = jwtTokenService;
+        this.userService = userService;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        String token = this.retrieveToken(httpServletRequest);
 
-        if (jwtTokenService.isValid(token)) {
-            authenticateRequest(token);
+        try {
+
+            String token = this.retrieveToken(httpServletRequest);
+
+            if (jwtTokenService.isValid(token)) {
+                authenticateRequest(token);
+                filterChain.doFilter(httpServletRequest, httpServletResponse);
+            }
+        }catch (MissingTokenException e){
+            /**
+             * TODO: CHECK WHY MESSAGE IS NOT RETURNED TO CLIENT
+             */
+                httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
         }
 
-        filterChain.doFilter(httpServletRequest, httpServletResponse);
+
     }
 
     private String retrieveToken (HttpServletRequest request) {
@@ -41,7 +52,7 @@ public class AuthFilter extends OncePerRequestFilter {
         String token = request.getHeader("Authorization");
 
         if (token == null || token.isBlank() || !token.startsWith("Bearer ")) {
-            return null;
+            throw new MissingTokenException("No JWT token found in request headers");
         }
 
         // Token without 'Bearer'
