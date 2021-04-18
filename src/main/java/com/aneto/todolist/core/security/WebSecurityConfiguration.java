@@ -33,9 +33,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
 
-                http
+                http.antMatcher("/task/**")
                         .authorizeRequests()
-                        .antMatchers("/task/**").permitAll()
+                        .anyRequest()
+                        .hasRole("USER")
                         .and()
                         .csrf().disable()
                         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
