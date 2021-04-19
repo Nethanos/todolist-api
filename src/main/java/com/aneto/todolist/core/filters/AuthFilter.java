@@ -5,6 +5,7 @@ import com.aneto.todolist.core.security.ApplicationUserDetails;
 import com.aneto.todolist.core.services.JwtTokenService;
 import com.aneto.todolist.user.domain.User;
 import com.aneto.todolist.user.service.UserService;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -41,7 +42,11 @@ public class AuthFilter extends OncePerRequestFilter {
             /**
              * TODO: CHECK WHY MESSAGE IS NOT RETURNED TO CLIENT
              */
-                httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
+            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
+        }
+        catch (ExpiredJwtException e){
+            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Expired Token");
+
         }
 
 
