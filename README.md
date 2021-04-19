@@ -24,7 +24,7 @@ Para rodar a aplicação de fato, utilize os seguintes passos:
 buildar o projeto e compilará um .jar na pasta /target da aplicação) <br>
 <strong>OBS</strong>: Se não tiver o mvn como variável de ambiente em sua máquina, não tem problema, basta substituir o mvn por ./mvnw e usar o wrapper do maven contido no projeto. Ex: `./mvnw clean package`.
 
-- Após o build do projeto, ainda na pasta raíz basta rodar `target/todolist-0.0.1-SNAPSHOT.jar` e esperar o projeto rodar na porta 8080 de sua máquina!
+- Após o build do projeto, ainda na pasta raíz basta rodar `mvn java -jar target/todolist-0.0.1-SNAPSHOT.jar` e esperar o projeto rodar na porta 8080 de sua máquina!
 
 - Também é possível rodar via IDE. no Intellij, basta importar o projeto como um projeto maven, e executar a classe `TodoListApplication`
 
