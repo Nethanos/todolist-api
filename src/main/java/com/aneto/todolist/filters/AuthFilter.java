@@ -6,6 +6,7 @@ import com.aneto.todolist.security.JwtTokenService;
 import com.aneto.todolist.user.domain.User;
 import com.aneto.todolist.user.services.UserService;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.security.SignatureException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -44,9 +45,8 @@ public class AuthFilter extends OncePerRequestFilter {
              */
             httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token not found");
         }
-        catch (ExpiredJwtException e){
+        catch (ExpiredJwtException | SignatureException e){
             httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Expired Token");
-
         }
     }
 

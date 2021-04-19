@@ -64,7 +64,7 @@ public class TaskController {
 
     @ApiOperation(value = "Create a new Task")
     @PostMapping
-    public ResponseEntity<String> newTask(@Valid @RequestBody NewTaskRequest newTaskRequest) {
+    public ResponseEntity<String> newTask( @RequestBody NewTaskRequest newTaskRequest) {
 
         Task newTask = newTaskRequest.toModel();
 
@@ -75,7 +75,7 @@ public class TaskController {
 
     @ApiOperation(value = "Update a task")
     @PutMapping("/{id}")
-    public ResponseEntity updateTask(@RequestBody UpdateTaskRequest updateTaskRequest, @PathVariable String id){
+    public ResponseEntity updateTask(@RequestBody @Valid UpdateTaskRequest updateTaskRequest, @PathVariable String id){
         taskService.updateTask(updateTaskRequest.toModel(), id);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

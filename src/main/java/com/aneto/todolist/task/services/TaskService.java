@@ -1,5 +1,6 @@
 package com.aneto.todolist.task.services;
 
+import com.aneto.todolist.core.exceptions.ApplicationDomainException;
 import com.aneto.todolist.core.providers.LoggedUserProvider;
 import com.aneto.todolist.task.domain.Task;
 import com.aneto.todolist.task.domain.TaskStatus;
@@ -9,6 +10,7 @@ import com.aneto.todolist.user.domain.User_;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -49,11 +51,11 @@ public class TaskService {
     }
 
     public Task retrieveTask(String taskId){
-        Optional<Task> optionalTask = Optional.of(em.find(Task.class, taskId));
+        Optional<Task> optionalTask = Optional.ofNullable(em.find(Task.class, taskId));
 
         //TODO: Ajustar log
 
-        return optionalTask.orElseThrow(() -> new RuntimeException("Não achei man"));
+        return optionalTask.orElseThrow(() -> new ApplicationDomainException("Tarefa não encontrada", "Task"));
     }
 
     private CriteriaQuery<Task> getTaskCriteriaQuery(String taskStatus, String userId) {
@@ -90,6 +92,7 @@ public class TaskService {
 
         em.persist(task);
 
+        //TODO: Ajustar exception
         Assert.notNull(task.getId(), "Usuário não encontrado");
 
         return task.getId();
