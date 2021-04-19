@@ -1,4 +1,4 @@
-package com.aneto.todolist.user.service;
+package com.aneto.todolist.user.services;
 
 import com.aneto.todolist.user.domain.User;
 import org.springframework.stereotype.Service;

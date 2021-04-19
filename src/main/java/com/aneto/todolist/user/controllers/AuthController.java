@@ -1,7 +1,7 @@
 package com.aneto.todolist.user.controllers;
 
 
-import com.aneto.todolist.core.services.JwtTokenService;
+import com.aneto.todolist.security.JwtTokenService;
 import com.aneto.todolist.user.dto.LoginFormRequest;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.persistence.NoResultException;
 
 @RestController
 @RequestMapping("/auth")

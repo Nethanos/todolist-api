@@ -1,7 +1,7 @@
-package com.aneto.todolist.core.security;
+package com.aneto.todolist.security;
 
 import com.aneto.todolist.user.domain.User;
-import com.aneto.todolist.user.service.UserService;
+import com.aneto.todolist.user.services.UserService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

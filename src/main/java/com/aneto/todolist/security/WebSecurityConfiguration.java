@@ -1,8 +1,7 @@
-package com.aneto.todolist.core.security;
+package com.aneto.todolist.security;
 
-import com.aneto.todolist.core.filters.AuthFilter;
-import com.aneto.todolist.core.services.JwtTokenService;
-import com.aneto.todolist.user.service.UserService;
+import com.aneto.todolist.filters.AuthFilter;
+import com.aneto.todolist.user.services.UserService;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

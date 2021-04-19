@@ -1,8 +1,6 @@
 package com.aneto.todolist.user.services;
 
-import com.aneto.todolist.task.domain.Task;
 import com.aneto.todolist.user.domain.User;
-import com.aneto.todolist.user.service.UserService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

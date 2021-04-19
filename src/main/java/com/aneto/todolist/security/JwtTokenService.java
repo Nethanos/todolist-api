@@ -1,8 +1,7 @@
-package com.aneto.todolist.core.services;
+package com.aneto.todolist.security;
 
-import com.aneto.todolist.core.security.ApplicationUserDetails;
+import com.aneto.todolist.security.ApplicationUserDetails;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;

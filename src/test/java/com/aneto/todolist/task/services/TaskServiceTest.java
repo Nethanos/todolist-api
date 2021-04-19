@@ -106,14 +106,7 @@ public class TaskServiceTest {
     @WithUserDetails("johnDoe")
     public void getAllTasks(){
 
-        when(em.getCriteriaBuilder()).thenReturn(cb);
-        when(em.getCriteriaBuilder()).thenReturn(cb);
-        when(cb.createQuery(Task.class)).thenReturn(criteriaQuery);
-        when(criteriaQuery.from(Task.class)).thenReturn(rootTask);
-        when(rootTask.get(Task_.user)).thenReturn(user);
-        when(rootTask.get(Task_.id)).thenReturn(id);
-        when(em.createQuery(criteriaQuery)).thenReturn(typedQuery);
-        when(typedQuery.getResultList()).thenReturn(getTaskList());
+        mockCriteriaQuery();
 
 
         List<Task> returnedTaskList = taskService.getTasks("pending");
@@ -132,6 +125,19 @@ public class TaskServiceTest {
         Task task = taskService.retrieveTask(createTask().getId());
 
         taskService.deleteTask(task.getId());
+    }
+
+
+    @Test
+    @WithUserDetails("admin")
+    public void getTasksAsAdmin(){
+        mockCriteriaQuery();
+
+        taskService.getTasks("pending");
+
+        List<Task> returnedTaskList = taskService.getAllTasks("pending");
+
+        Assert.assertEquals(3, returnedTaskList.size());
     }
 
     private Task createTask(){
@@ -153,6 +159,18 @@ public class TaskServiceTest {
             taskList.add(new Task("Summary number " + i, "Description number " + i));
         }
         return taskList;
+    }
+
+
+    private void mockCriteriaQuery(){
+        when(em.getCriteriaBuilder()).thenReturn(cb);
+        when(em.getCriteriaBuilder()).thenReturn(cb);
+        when(cb.createQuery(Task.class)).thenReturn(criteriaQuery);
+        when(criteriaQuery.from(Task.class)).thenReturn(rootTask);
+        when(rootTask.get(Task_.user)).thenReturn(user);
+        when(rootTask.get(Task_.id)).thenReturn(id);
+        when(em.createQuery(criteriaQuery)).thenReturn(typedQuery);
+        when(typedQuery.getResultList()).thenReturn(getTaskList());
     }
 
 

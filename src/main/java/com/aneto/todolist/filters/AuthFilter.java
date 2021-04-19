@@ -1,10 +1,10 @@
-package com.aneto.todolist.core.filters;
+package com.aneto.todolist.filters;
 
 import com.aneto.todolist.core.exceptions.MissingTokenException;
-import com.aneto.todolist.core.security.ApplicationUserDetails;
-import com.aneto.todolist.core.services.JwtTokenService;
+import com.aneto.todolist.security.ApplicationUserDetails;
+import com.aneto.todolist.security.JwtTokenService;
 import com.aneto.todolist.user.domain.User;
-import com.aneto.todolist.user.service.UserService;
+import com.aneto.todolist.user.services.UserService;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

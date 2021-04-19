@@ -23,7 +23,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
     @ExceptionHandler(javax.validation.ConstraintViolationException.class)
     protected List<ApiError> handleConstraintViolation(
             javax.validation.ConstraintViolationException ex) {
-            
+
         return ex.getConstraintViolations().stream().map((constraintViolation -> {
             return new ApiError(constraintViolation.getPropertyPath().toString(), constraintViolation.getMessage());
         })).collect(Collectors.toList());

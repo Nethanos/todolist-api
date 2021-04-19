@@ -1,6 +1,6 @@
 package com.aneto.todolist.core.providers;
 
-import com.aneto.todolist.core.security.ApplicationUserDetails;
+import com.aneto.todolist.security.ApplicationUserDetails;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 public class LoggedUserProvider {
