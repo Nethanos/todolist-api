@@ -42,14 +42,12 @@ public class AuthFilter extends OncePerRequestFilter {
             /**
              * TODO: CHECK WHY MESSAGE IS NOT RETURNED TO CLIENT
              */
-            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
+            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token not found");
         }
         catch (ExpiredJwtException e){
             httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Expired Token");
 
         }
-
-
     }
 
     private String retrieveToken (HttpServletRequest request) {
