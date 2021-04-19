@@ -4,7 +4,6 @@ import com.aneto.todolist.core.providers.LoggedUserProvider;
 import com.aneto.todolist.task.domain.Task;
 import com.aneto.todolist.task.domain.TaskStatus;
 import com.aneto.todolist.task.domain.Task_;
-import com.aneto.todolist.task.dto.UpdateTaskRequest;
 import com.aneto.todolist.user.domain.User;
 import com.aneto.todolist.user.domain.User_;
 import org.springframework.stereotype.Service;
@@ -45,6 +44,8 @@ public class TaskService {
 
     public Task retrieveTask(String taskId){
         Optional<Task> optionalTask = Optional.of(em.find(Task.class, taskId));
+
+        //TODO: Ajustar log
 
         return optionalTask.orElseThrow(() -> new RuntimeException("Não achei man"));
     }
@@ -89,12 +90,12 @@ public class TaskService {
 
 
     @Transactional
-    public void updateTask(Task task, String taskId){
+    public Task updateTask(Task task, String taskId){
         Task actualTask = retrieveTask(taskId);
         actualTask.setStatus(task.getStatus());
         actualTask.setDescription(task.getDescription());
         actualTask.setSummary(task.getSummary());
-        em.merge(actualTask);
+        return em.merge(actualTask);
 
     }
 

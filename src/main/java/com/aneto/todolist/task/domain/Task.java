@@ -1,6 +1,5 @@
 package com.aneto.todolist.task.domain;
 
-
 import com.aneto.todolist.core.domain.DomainEntity;
 import com.aneto.todolist.user.domain.User;
 
@@ -13,7 +12,6 @@ import java.util.Date;
 @Entity
 @Table(name = "db_task")
 public class Task extends DomainEntity {
-
 
     @NotNull
     private final Date creationTime = new Date();
@@ -51,6 +49,11 @@ public class Task extends DomainEntity {
     public Task(@Valid String summary, @Valid String description) {
         this.summary = summary;
         this.description = description;
+    }
+
+    @PreUpdate
+    public void updateTime(){
+        this.updateTime = new Date();
     }
 
     public String getSummary() {
@@ -92,4 +95,5 @@ public class Task extends DomainEntity {
     public Date getUpdateTime() {
         return updateTime;
     }
+
 }
