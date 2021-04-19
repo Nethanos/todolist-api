@@ -2,6 +2,7 @@ package com.aneto.todolist.core.services;
 
 import com.aneto.todolist.core.security.ApplicationUserDetails;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -43,12 +44,10 @@ public class JwtTokenService {
     }
 
     public boolean isValid(String token) {
-        try {
+
             assertToken(token);
             return true;
-        } catch (Exception e) {
-            return false;
-        }
+
     }
 
     private void assertToken(String token) {
