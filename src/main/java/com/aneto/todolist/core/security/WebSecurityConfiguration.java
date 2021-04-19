@@ -33,10 +33,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
 
-                http.antMatcher("/task/**")
+                http
                         .authorizeRequests()
-                        .anyRequest()
+                        .antMatchers("/task/all")
+                        .hasRole("ADMIN")
+                        .antMatchers("/task/**")
                         .hasRole("USER")
+                        .antMatchers("/").permitAll()
                         .and()
                         .csrf().disable()
                         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -63,7 +66,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 web
                         .ignoring()
                         .antMatchers("/h2-console/**")
-                        .antMatchers("/auth/**");
+                        .antMatchers("/auth/**")
+                        .antMatchers("/actuator/**")
+                        .antMatchers("/swagger-ui**", "/csrf/**")
+                        .antMatchers("/webjars/**")
+                        .antMatchers("/swagger-resources/**")
+                        .antMatchers("/v2/api-docs/**");
         }
 
 
