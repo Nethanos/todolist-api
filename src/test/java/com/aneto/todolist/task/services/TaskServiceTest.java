@@ -1,28 +1,41 @@
 package com.aneto.todolist.task.services;
 
 import com.aneto.todolist.task.domain.Task;
+import io.jsonwebtoken.lang.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithUserDetails;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.*;
+
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
+@ContextConfiguration
 public class TaskServiceTest {
 
 
-    @Autowired
+    @Mock
     TaskService taskService;
 
 
     @Test
+    @WithUserDetails("johnDoe")
     public void saveNewTask(){
-        String taskId = taskService.createTask(createTask());
+       
 
-        assertNotNull(taskId);
+    }
+
+    @Test
+    @WithUserDetails("johnDoe")
+    public void getAllTasks(){
+
     }
 
 
