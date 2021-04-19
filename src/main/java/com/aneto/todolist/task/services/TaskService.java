@@ -42,6 +42,12 @@ public class TaskService {
 
     }
 
+    public List<Task> getAllTasks(String taskStatus){
+        CriteriaQuery<Task> criteria = getTaskCriteriaQuery(taskStatus, null);
+
+      return em.createQuery(criteria).getResultList();
+    }
+
     public Task retrieveTask(String taskId){
         Optional<Task> optionalTask = Optional.of(em.find(Task.class, taskId));
 
@@ -59,7 +65,9 @@ public class TaskService {
 
         ArrayList<Predicate> predicateList = new ArrayList<Predicate>();
 
-        predicateList.add(builder.equal(root.get(Task_.user).get(User_.id), userId));
+        if(Objects.nonNull(userId)){
+            predicateList.add(builder.equal(root.get(Task_.user).get(User_.id), userId));
+        }
         if(Objects.nonNull(taskStatus)){
             predicateList.add(builder.equal(root.get(Task_.status), TaskStatus.valueOf(taskStatus.toUpperCase())));
         }
