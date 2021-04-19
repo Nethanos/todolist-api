@@ -22,9 +22,6 @@ public class Task extends DomainEntity {
     @NotBlank
     private String description;
 
-    /**
-     * TODO: Find a way to create userFK in DB
-     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;

@@ -90,8 +90,7 @@ public class TaskService {
 
         em.persist(task);
 
-        //TODO: Ajustar exception
-        Assert.notNull(task.getId(), "Deu ruim");
+        Assert.notNull(task.getId(), "Usuário não encontrado");
 
         return task.getId();
     }

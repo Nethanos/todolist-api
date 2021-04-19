@@ -1,6 +1,5 @@
 package com.aneto.todolist.security;
 
-import com.aneto.todolist.security.ApplicationUserDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

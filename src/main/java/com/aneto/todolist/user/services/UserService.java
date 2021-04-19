@@ -33,7 +33,7 @@ public class UserService {
         /**
          * TODO: Tratar da forma correta
          */
-        return user.orElseThrow(() -> new RuntimeException("batata"));
+        return user.orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
     }
 
 
