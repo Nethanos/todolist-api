@@ -1,20 +1,17 @@
 package com.aneto.todolist.core.exceptions;
-
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
-public class ApplicationExceptionHandler {
+public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
 
     private final MessageSource validationMessageSource;
 
@@ -23,17 +20,13 @@ public class ApplicationExceptionHandler {
     }
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public List<ApiError> RequestValidation (MethodArgumentNotValidException exception) {
-
-        List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
-
-        return fieldErrors.stream().map(fieldError -> {
-            String message = validationMessageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
-            return new ApiError(fieldError.getField(), message);
-        }).collect(Collectors.toList());
+    @ExceptionHandler(javax.validation.ConstraintViolationException.class)
+    protected List<ApiError> handleConstraintViolation(
+            javax.validation.ConstraintViolationException ex) {
+        
+        return ex.getConstraintViolations().stream().map((constraintViolation -> {
+            return new ApiError(constraintViolation.getPropertyPath().toString(), constraintViolation.getMessage());
+        })).collect(Collectors.toList());
     }
-
-
 
 }
