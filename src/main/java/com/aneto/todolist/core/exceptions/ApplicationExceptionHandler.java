@@ -40,4 +40,5 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
     protected ApiError ApplicationDomainException(ApplicationDomainException ex){
         return new ApiError(ex.getDomainEntity(), ex.getMessage());
     }
+
 }

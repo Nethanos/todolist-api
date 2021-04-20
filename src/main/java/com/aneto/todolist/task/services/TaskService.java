@@ -70,7 +70,7 @@ public class TaskService {
         if(Objects.nonNull(userId)){
             predicateList.add(builder.equal(root.get(Task_.user).get(User_.id), userId));
         }
-        if(Objects.nonNull(taskStatus)){
+        if(Objects.nonNull(taskStatus) && TaskStatus.isValid(taskStatus)){
             predicateList.add(builder.equal(root.get(Task_.status), TaskStatus.valueOf(taskStatus.toUpperCase())));
         }
 
