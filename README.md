@@ -8,7 +8,7 @@
   
  # Funções implementadas
  - Autenticação via JWT
- - CRUD de Tarefas
+ - CRUD de Tarefas com visualização por usuário ou visualização de todas as tarefas em caso de user admin
  - Autorização de acesso a endpoints via roles(USER, ADMIN)
  - Healthcheck
 - Documentação de API via swagger
@@ -42,7 +42,7 @@ Para rodar a aplicação de fato, utilize os seguintes passos:
 
 - <strong>Criar nova tarefa: </strong> `curl -XPOST -H 'authorization: Bearer meutoken' -H "Content-type: application/json" -d '{"summary": "thirdTask", "description": "thirdDescription" }' 'http://localhost:8080/task
 
-- <strong> Listar tarefas: </strong> `curl -XGET -H 'authorization: Bearer meutoken' -H "Content-type: application/json" 'http://localhost:8080/task `
+- <strong> Listar tarefas: </strong> `curl -XGET -H 'authorization: Bearer meutoken' -H "Content-type: application/json" 'http://localhost:8080/task` É possível filtrar as tarefas por status adicionando a query string `status` ao final da url. Ex: `http://localhost:8080/task?status=pending`
 
 - <strong> Atualizar uma tarefa: </strong>: `curl -XPUT -H 'authorization: Bearer meutoken' -H "Content-type: application/json" -d '{"summary": "new summary", "description": "thirdDescription"}' 'http://localhost:8080/task/2c93908178ec6b800178ec6d1a730000'`
 
