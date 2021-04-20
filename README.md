@@ -24,7 +24,7 @@ Para rodar a aplicação de fato, utilize os seguintes passos:
 - Com o cmd/git bash ou interface de linha de comando preferida, vá até a raíz do repositório e execute `mvn clean install package`(Este comando vai limpar o target, baixar as dependências, buildar o projeto e compilará um .jar na pasta /target da aplicação) <br>
 <strong>OBS</strong>: Se não tiver o maven instalado ou setado como variável de ambiente em sua máquina, não tem problema, basta substituir o mvn por `./mvnw` <strong>sempre na pasta raíz do projeto</strong> em todos os comandos e assim você irá usar o wrapper do maven contido no projeto. Ex: `./mvnw clean package`.
 
-- Após o build do projeto, ainda na pasta raíz basta rodar `mvn java -jar target/todolist-0.0.1-SNAPSHOT.jar` e esperar o projeto rodar na porta 8080 de sua máquina!
+- Após o build do projeto, ainda na pasta raíz basta rodar `java -jar target/todolist-0.0.1-SNAPSHOT.jar` e esperar o projeto rodar na porta 8080 de sua máquina!
 
 - Também é possível rodar via IDE. no Intellij, basta importar o projeto como um projeto maven, e executar a classe `TodoListApplication`
 
