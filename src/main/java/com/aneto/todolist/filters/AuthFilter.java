@@ -6,6 +6,7 @@ import com.aneto.todolist.security.JwtTokenService;
 import com.aneto.todolist.user.domain.User;
 import com.aneto.todolist.user.services.UserService;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -47,6 +48,9 @@ public class AuthFilter extends OncePerRequestFilter {
         }
         catch (ExpiredJwtException | SignatureException e){
             httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Expired Token");
+        }catch(MalformedJwtException ex){
+            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid Token");
+
         }
     }
 
