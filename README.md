@@ -38,18 +38,18 @@ Para rodar a aplicação de fato, utilize os seguintes passos:
 # Testando a aplicação:
 <strong> OBS: aconselho fortemente a executar estes comandos no git bash, pois ao rodar via CMD, será necessário adicionar um caractere de escape em cada aspas dentro do JSON</strong>
 - Como requisitado, para testar a aplicação via curl, é necessário primeiramente se logar para receber o token de autenticação, no git bash, com a aplicação rodando, basta executar:
-`curl -H "Content-type: application/json" -d '{"username": "johnDoe", "password": "1234"}' 'http://localhost:8080/auth'`
+`curl -H "Content-type: application/json" -d '{"username": "johnDoe", "password": "1234"}' 'http://localhost:8080/auth' `
 - Com este token, é possível navegar pelas urls da API de forma livre enquanto o mesmo não expirar. Abaixo, exemplos dos comandos possíveis com o Authorization header setado,(subtituia a palavra <strong>meutoken</strong> pelo token retornado ao logar, tomando cuidado para não repetir a palavra <strong>Bearer</strong>:
 
-- <strong>Criar nova tarefa: </strong> `curl -XPOST -H 'authorization: Bearer meutoken' -H "Content-type: application/json" -d '{"summary": "thirdTask", "description": "thirdDescription" }' 'http://localhost:8080/task`
+- <strong>Criar nova tarefa: </strong> `curl -XPOST -H 'authorization: Bearer <strong>meutoken</strong>' -H "Content-type: application/json" -d '{"summary": "thirdTask", "description": "thirdDescription" }' 'http://localhost:8080/task' `
 
-- <strong> Listar tarefas: </strong> `curl -XGET -H 'authorization: Bearer meutoken' -H "Content-type: application/json" 'http://localhost:8080/task` É possível filtrar as tarefas por status adicionando a query string `status` ao final da url. Ex: `http://localhost:8080/task?status=pending`
+- <strong> Listar tarefas: </strong> `curl -XGET -H 'authorization: Bearer <strong>meutoken</strong>' -H "Content-type: application/json" 'http://localhost:8080/task` É possível filtrar as tarefas por status adicionando a query string `status` ao final da url. Ex: `http://localhost:8080/task?status=pending`
 
-- <strong> Atualizar uma tarefa: </strong>: `curl -XPUT -H 'authorization: Bearer meutoken' -H "Content-type: application/json" -d '{"summary": "new summary", "description": "thirdDescription"}' 'http://localhost:8080/task/2c93908178ec6b800178ec6d1a730000'`
+- <strong> Atualizar uma tarefa: </strong>: `curl -XPUT -H 'authorization: Bearer <strong>meutoken</strong>' -H "Content-type: application/json" -d '{"summary": "new summary", "description": "thirdDescription"}' 'http://localhost:8080/task/2c93908178ec6b800178ec6d1a730000'`
 
-- <strong> Excluir uma tarefa: </strong>: `curl -XDELETE -H 'authorization: Bearer meutoken' -H "Content-type: application/json" 'http://localhost:8080/task/2c93908178ec6b800178ec6d1a730000'`
+- <strong> Excluir uma tarefa: </strong>: `curl -XDELETE -H 'authorization: Bearer <strong>meutoken</strong>' -H "Content-type: application/json" 'http://localhost:8080/task/2c93908178ec6b800178ec6d1a730000'`
 
-- <strong> Para usar o modo admin</strong>, use o primeiro comando curl, passando como username admin e password 1234: `curl -H "Content-type: application/json" -d '{"username": "admin", "password": "1234"}' 'http://localhost:8080/auth'`. <br> Pegue o bearer token retornado para usar na request abaixo: `curl -XGET -H 'authorization: Bearer meutoken' -H "Content-type: application/json" 'http://localhost:8080/task/all'`
+- <strong> Para usar o modo admin</strong>, use o primeiro comando curl, passando como username admin e password 1234: `curl -H "Content-type: application/json" -d '{"username": "admin", "password": "1234"}' 'http://localhost:8080/auth'`. <br> Pegue o bearer token retornado para usar na request abaixo: `curl -XGET -H 'authorization: Bearer <strong>meutoken</strong>' -H "Content-type: application/json" 'http://localhost:8080/task/all'`
 
 # Usuários disponíveis:
 - admin(login: admin, password: 1234) - ROLE ADMIN
