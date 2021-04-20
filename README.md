@@ -41,7 +41,7 @@ Para rodar a aplicação de fato, utilize os seguintes passos:
 `curl -H "Content-type: application/json" -d '{"username": "johnDoe", "password": "1234"}' 'http://localhost:8080/auth'`
 - Com este token, é possível navegar pelas urls da API de forma livre enquanto o mesmo não expirar. Abaixo, exemplos dos comandos possíveis com o Authorization header setado,(subtituia a palavra <strong>meutoken</strong> pelo token retornado ao logar, tomando cuidado para não repetir a palavra <strong>Bearer</strong>:
 
-- <strong>Criar nova tarefa: </strong> `curl -XPOST -H 'authorization: Bearer meutoken' -H "Content-type: application/json" -d '{"summary": "thirdTask", "description": "thirdDescription" }' 'http://localhost:8080/task
+- <strong>Criar nova tarefa: </strong> `curl -XPOST -H 'authorization: Bearer meutoken' -H "Content-type: application/json" -d '{"summary": "thirdTask", "description": "thirdDescription" }' 'http://localhost:8080/task`
 
 - <strong> Listar tarefas: </strong> `curl -XGET -H 'authorization: Bearer meutoken' -H "Content-type: application/json" 'http://localhost:8080/task` É possível filtrar as tarefas por status adicionando a query string `status` ao final da url. Ex: `http://localhost:8080/task?status=pending`
 
