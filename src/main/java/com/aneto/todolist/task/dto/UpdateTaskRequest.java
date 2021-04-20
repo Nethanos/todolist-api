@@ -20,7 +20,7 @@ public class UpdateTaskRequest {
     private String status;
 
     public Task toModel(){
-        Task taskToBeUpdated = new Task(description, summary);
+        Task taskToBeUpdated = new Task(summary, description);
         if(status != null){
             taskToBeUpdated.setStatus(TaskStatus.valueOf(status.toUpperCase()));
         }

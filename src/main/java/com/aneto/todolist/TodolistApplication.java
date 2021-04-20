@@ -16,8 +16,7 @@ public class TodolistApplication {
 
 		SpringApplication.run(TodolistApplication.class, args);
 
-		log.debug("Starting todo list in debug with {} args", args.length);
-		log.info("Starting todo list with {} args.", args.length);
+		log.info("Started todo list with {} args.", args.length);
 	}
 
 }
