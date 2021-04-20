@@ -116,6 +116,11 @@
 			<artifactId>hibernate-jpamodelgen</artifactId>
 			<version>5.3.7.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>org.junit.vintage</groupId>
+			<artifactId>junit-vintage-engine</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
