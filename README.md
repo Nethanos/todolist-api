@@ -29,7 +29,7 @@ Para rodar a aplicação de fato, utilize os seguintes passos:
 - Também é possível rodar via IDE. no Intellij, basta importar o projeto como um projeto maven, e executar a classe `TodoListApplication`
 
 # Informações úteis
-- O link para a documentação da API se encontra em `http://localhost:8080/swagger-ui.html`
+- O link para a documentação da API se encontra em `http://localhost:8080/swagger-ui.html`(não está habilitado testar via swagger por causa das rotas de autenticação, sempre dará unauthorized)
 - Para checar informações sobre o estado da aplicação, basta acessar `http://localhost:8080/actuator/health`
 - O banco escolhido foi o H2 por motivos de facilidade e compatibilidade de rodar em qualquer máquina e seu paradgima SQL que, em minha opinião, se assemelha ao relacionamento entre entidades apresentado no case.
 - Para ter acesso ao console do H2 basta acessar `http://localhost:8080/h2-console` e usar `sa` como username, e deixar o password vazio.
